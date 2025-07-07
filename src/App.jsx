@@ -5,10 +5,15 @@ import { translations } from "./translations";
 
 export default function App() {
   const [language, setLanguage] = useState("ja");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const t = translations[language];
 
   const toggleLanguage = () => {
     setLanguage(language === "ja" ? "en" : "ja");
+  };
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
   };
 
   // Smooth scroll function
@@ -48,7 +53,7 @@ export default function App() {
   };
 
   return (
-    <div className="main-container flex w-[1280px] flex-col items-start flex-nowrap bg-[#fff] relative mx-auto my-0">
+    <div className="main-container flex w-full max-w-[1280px] flex-col items-start flex-nowrap bg-[#fff] relative mx-auto my-0">
       <div className="flex flex-col items-start self-stretch shrink-0 flex-nowrap bg-[#fff] relative overflow-hidden">
         <div className="flex flex-col items-start self-stretch shrink-0 flex-nowrap relative z-[1]">
           {/* Header */}
@@ -56,24 +61,25 @@ export default function App() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex pt-[12px] pr-[40px] pb-[12px] pl-[40px] justify-between items-center self-stretch shrink-0 flex-nowrap border-solid border-t border-t-[#e5e8ea] relative z-[2] bg-white/90 backdrop-blur-sm sticky top-0"
+            className="flex pt-[12px] pr-[16px] md:pr-[40px] pb-[12px] pl-[16px] md:pl-[40px] justify-between items-center self-stretch shrink-0 flex-nowrap border-solid border-t border-t-[#e5e8ea] relative z-[2] bg-white/90 backdrop-blur-sm sticky top-0"
           >
-            <div className="flex w-[196px] gap-[16px] items-center shrink-0 flex-nowrap relative z-[3]">
+            <div className="flex gap-[8px] md:gap-[16px] items-center shrink-0 flex-nowrap relative z-[3]">
               <div className="flex w-[16px] flex-col items-start shrink-0 flex-nowrap relative z-[4]">
                 <div className="w-[16px] grow shrink-0 basis-0 bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-07/eLHJDQDksR.png)] bg-cover bg-no-repeat relative overflow-hidden z-[5]" />
               </div>
-              <div className="flex w-[164px] h-[23px] flex-col items-start shrink-0 flex-nowrap relative z-[6]">
-                <span className="h-[23px] self-stretch shrink-0 basis-auto font-['Manrope'] text-[18px] font-bold leading-[23px] text-[#111416] relative text-left whitespace-nowrap z-[7]">
+              <div className="flex h-[23px] flex-col items-start shrink-0 flex-nowrap relative z-[6]">
+                <span className="h-[23px] shrink-0 basis-auto font-['Manrope'] text-[14px] md:text-[18px] font-bold leading-[23px] text-[#111416] relative text-left whitespace-nowrap z-[7]">
                   {t.companyName}
                 </span>
               </div>
             </div>
-            <div className="flex gap-[32px] justify-end items-start grow shrink-0 basis-0 flex-nowrap relative z-[8]">
-              <div className="flex w-[330px] h-[40px] gap-[36px] items-center shrink-0 flex-nowrap relative z-[9]">
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex gap-[32px] justify-end items-start grow shrink-0 basis-0 flex-nowrap relative z-[8]">
+              <div className="flex h-[40px] gap-[36px] items-center shrink-0 flex-nowrap relative z-[9]">
                 <motion.a 
                   href="#overview" 
                   onClick={(e) => scrollToSection(e, 'overview')}
-                  className="flex w-[61px] flex-col items-start shrink-0 flex-nowrap relative z-10 cursor-pointer"
+                  className="flex flex-col items-start shrink-0 flex-nowrap relative z-10 cursor-pointer"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -84,7 +90,7 @@ export default function App() {
                 <motion.a 
                   href="#success-stories" 
                   onClick={(e) => scrollToSection(e, 'success-stories')}
-                  className="flex w-[88px] flex-col items-start shrink-0 flex-nowrap relative z-[12] cursor-pointer"
+                  className="flex flex-col items-start shrink-0 flex-nowrap relative z-[12] cursor-pointer"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -95,7 +101,7 @@ export default function App() {
                 <motion.a 
                   href="#pricing" 
                   onClick={(e) => scrollToSection(e, 'pricing')}
-                  className="flex w-[46px] flex-col items-start shrink-0 flex-nowrap relative z-[14] cursor-pointer"
+                  className="flex flex-col items-start shrink-0 flex-nowrap relative z-[14] cursor-pointer"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -106,7 +112,7 @@ export default function App() {
                 <motion.a 
                   href="#faq" 
                   onClick={(e) => scrollToSection(e, 'faq')}
-                  className="flex w-[27px] flex-col items-start shrink-0 flex-nowrap relative z-[16] cursor-pointer"
+                  className="flex flex-col items-start shrink-0 flex-nowrap relative z-[16] cursor-pointer"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -140,10 +146,120 @@ export default function App() {
                 </div>
               </motion.div>
             </div>
+            
+            {/* Mobile Menu Button */}
+            <motion.button
+              onClick={toggleMobileMenu}
+              className="flex md:hidden w-[40px] h-[40px] justify-center items-center flex-nowrap relative z-[18] cursor-pointer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {mobileMenuOpen ? (
+                  <path d="M18 6L6 18M6 6L18 18" stroke="#111416" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                ) : (
+                  <>
+                    <path d="M3 12H21" stroke="#111416" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M3 6H21" stroke="#111416" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M3 18H21" stroke="#111416" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </>
+                )}
+              </svg>
+            </motion.button>
           </motion.div>
 
+          {/* Mobile Navigation Menu */}
+          <AnimatePresence>
+            {mobileMenuOpen && (
+              <>
+                {/* Overlay */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="fixed inset-0 bg-black/30 z-[49] md:hidden"
+                  onClick={toggleMobileMenu}
+                />
+                
+                {/* Mobile Menu */}
+                <motion.div
+                  initial={{ x: "100%" }}
+                  animate={{ x: 0 }}
+                  exit={{ x: "100%" }}
+                  transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                  className="fixed top-0 right-0 h-full w-[280px] bg-white shadow-xl z-50 md:hidden overflow-y-auto"
+                >
+                  <div className="flex flex-col p-[24px]">
+                    {/* Mobile Menu Header */}
+                    <div className="flex justify-between items-center mb-[32px]">
+                      <span className="font-['Manrope'] text-[18px] font-bold text-[#111416]">
+                        {t.companyName}
+                      </span>
+                      <motion.button
+                        onClick={toggleMobileMenu}
+                        className="w-[32px] h-[32px] flex justify-center items-center"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M18 6L6 18M6 6L18 18" stroke="#111416" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </motion.button>
+                    </div>
+                    
+                    {/* Navigation Links */}
+                    <div className="flex flex-col gap-[24px] mb-[32px]">
+                      {['overview', 'caseStudies', 'pricing', 'faq'].map((section) => (
+                        <motion.a
+                          key={section}
+                          href={`#${section === 'caseStudies' ? 'success-stories' : section}`}
+                          onClick={(e) => {
+                            scrollToSection(e, section === 'caseStudies' ? 'success-stories' : section);
+                            toggleMobileMenu();
+                          }}
+                          className="font-['Manrope'] text-[16px] font-medium text-[#111416] hover:text-[#4169E1] transition-colors"
+                          whileHover={{ x: 5 }}
+                        >
+                          {t.nav[section]}
+                        </motion.a>
+                      ))}
+                    </div>
+                    
+                    {/* Language Toggle */}
+                    <motion.button
+                      onClick={toggleLanguage}
+                      className="flex h-[40px] px-[12px] items-center justify-center gap-[4px] mb-[16px] flex-nowrap bg-[#f2f2f4] rounded-[20px] relative overflow-hidden cursor-pointer hover:bg-[#e5e8ea] transition-colors"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 1.66669C5.39756 1.66669 1.66663 5.39762 1.66663 10C1.66663 14.6024 5.39756 18.3334 10 18.3334C14.6024 18.3334 18.3333 14.6024 18.3333 10C18.3333 5.39762 14.6024 1.66669 10 1.66669ZM16.4729 6.66669H13.7916C13.5104 5.58335 13.0833 4.55419 12.5208 3.61044C14.1645 4.21877 15.502 5.29377 16.4729 6.66669ZM10 3.36044C10.775 4.36252 11.3583 5.47919 11.6604 6.66669H8.33954C8.64163 5.47919 9.22496 4.36252 10 3.36044ZM3.68538 11.6667C3.55621 11.1271 3.33329 10.5771 3.33329 10C3.33329 9.42294 3.55621 8.87294 3.68538 8.33335H6.70829C6.62079 8.88752 6.66663 9.44169 6.66663 10C6.66663 10.5584 6.62079 11.1125 6.70829 11.6667H3.68538ZM5.52704 13.3334H8.20829C8.48954 14.4167 8.91663 15.4459 9.47913 16.3896C7.83538 15.7813 6.49788 14.7063 5.52704 13.3334ZM8.20829 6.66669H5.52704C6.49788 5.29377 7.83538 4.21877 9.47913 3.61044C8.91663 4.55419 8.48954 5.58335 8.20829 6.66669ZM10 16.6396C9.22496 15.6375 8.64163 14.5209 8.33954 13.3334H11.6604C11.3583 14.5209 10.775 15.6375 10 16.6396ZM11.9625 11.6667H8.03746C7.93746 11.1125 7.83329 10.5584 7.83329 10C7.83329 9.44169 7.93746 8.87919 8.03746 8.33335H11.9625C12.0625 8.87919 12.1666 9.44169 12.1666 10C12.1666 10.5584 12.0625 11.1125 11.9625 11.6667ZM12.5208 16.3896C13.0833 15.4459 13.5104 14.4167 13.7916 13.3334H16.4729C15.502 14.7063 14.1645 15.7813 12.5208 16.3896ZM13.2916 11.6667C13.3791 11.1125 13.3333 10.5584 13.3333 10C13.3333 9.44169 13.3791 8.88752 13.2916 8.33335H16.3145C16.4437 8.87294 16.6666 9.42294 16.6666 10C16.6666 10.5771 16.4437 11.1271 16.3145 11.6667H13.2916Z" fill="#111416"/>
+                      </svg>
+                      <span className="font-['Manrope'] text-[14px] font-medium leading-[21px] text-[#111416]">
+                        {language === "ja" ? "EN" : "日本語"}
+                      </span>
+                    </motion.button>
+                    
+                    {/* Get Started Button */}
+                    <motion.button
+                      className="flex h-[48px] pt-0 pr-[20px] pb-0 pl-[20px] justify-center items-center flex-nowrap bg-[#dbe8f2] rounded-[24px] relative overflow-hidden cursor-pointer hover:bg-[#c5d8e8] transition-colors"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={toggleMobileMenu}
+                    >
+                      <span className="font-['Manrope'] text-[16px] font-bold leading-[24px] text-[#111416] relative text-center">
+                        {t.nav.getStarted}
+                      </span>
+                    </motion.button>
+                  </div>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
+
           {/* Hero Section */}
-          <div className="flex pt-[20px] pr-[160px] pb-[20px] pl-[160px] justify-center items-start self-stretch grow shrink-0 basis-0 flex-nowrap relative z-[21]">
+          <div className="flex pt-[20px] px-[16px] md:px-[80px] lg:px-[160px] justify-center items-start self-stretch grow shrink-0 basis-0 flex-nowrap relative z-[21]">
             <div className="flex flex-col items-start grow shrink-0 basis-0 flex-nowrap relative overflow-hidden z-[22]">
               <motion.div 
                 className="flex flex-col items-start self-stretch shrink-0 flex-nowrap relative z-[23]"
@@ -152,26 +268,26 @@ export default function App() {
                 transition={{ duration: 0.8 }}
               >
                 <div className="flex pt-[16px] pr-[16px] pb-[16px] pl-[16px] flex-col items-start self-stretch grow shrink-0 basis-0 flex-nowrap relative z-[24]">
-                  <div className="h-[480px] self-stretch shrink-0 bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-07/nUhg12s8ac.png)] bg-cover bg-no-repeat rounded-[12px] relative overflow-hidden z-[25]">
+                  <div className="h-[300px] md:h-[400px] lg:h-[480px] self-stretch shrink-0 bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-07/nUhg12s8ac.png)] bg-cover bg-center bg-no-repeat rounded-[12px] relative overflow-hidden z-[25]">
                     <motion.div 
-                      className="flex w-[848px] flex-col gap-[8px] items-start flex-nowrap relative z-[26] mt-[285px] mr-0 mb-0 ml-[216px]"
+                      className="flex w-full max-w-[848px] flex-col gap-[8px] items-start flex-nowrap absolute bottom-[60px] left-[20px] md:left-[40px] lg:left-[216px] right-[20px] md:right-[40px] z-[26]"
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, delay: 0.3 }}
                     >
                       <div className="flex h-[120px] flex-col items-start self-stretch shrink-0 flex-nowrap relative z-[27]">
-                        <span className="flex w-[848px] h-[120px] justify-start items-start self-stretch shrink-0 font-['Manrope'] text-[48px] font-extrabold leading-[60px] text-[#fff] tracking-[-2px] relative text-left z-[28]" style={{ whiteSpace: 'pre-line' }}>
+                        <span className="flex w-full h-auto justify-start items-start self-stretch shrink-0 font-['Manrope'] text-[28px] md:text-[36px] lg:text-[48px] font-extrabold leading-[36px] md:leading-[45px] lg:leading-[60px] text-[#fff] tracking-[-1px] lg:tracking-[-2px] relative text-left z-[28]" style={{ whiteSpace: 'pre-line' }}>
                           {t.hero.title}
                         </span>
                       </div>
                       <div className="flex flex-col items-start self-stretch shrink-0 flex-nowrap relative z-[29]">
-                        <span className="flex w-[848px] h-[48px] justify-start items-start self-stretch shrink-0 font-['Manrope'] text-[16px] font-normal leading-[24px] text-[#fff] relative text-left z-30">
+                        <span className="flex w-full h-auto justify-start items-start self-stretch shrink-0 font-['Manrope'] text-[14px] md:text-[16px] font-normal leading-[21px] md:leading-[24px] text-[#fff] relative text-left z-30">
                           {t.hero.description}
                         </span>
                       </div>
                     </motion.div>
                     <motion.div 
-                      className="flex w-[134px] h-[48px] pt-0 pr-[20px] pb-0 pl-[20px] justify-center items-center flex-nowrap bg-[#dbe8f2] rounded-[24px] relative overflow-hidden z-[31] mt-[32px] mr-0 mb-0 ml-[216px]"
+                      className="flex w-[134px] h-[48px] pt-0 pr-[20px] pb-0 pl-[20px] justify-center items-center flex-nowrap bg-[#dbe8f2] rounded-[24px] absolute bottom-[20px] left-[20px] md:left-[40px] lg:left-[216px] overflow-hidden z-[31]"
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.5, delay: 0.5 }}
@@ -196,13 +312,13 @@ export default function App() {
                 variants={staggerContainer}
               >
                 <motion.div className="flex flex-col gap-[16px] items-start self-stretch shrink-0 flex-nowrap relative z-[35]" variants={fadeIn}>
-                  <div className="flex w-[720px] h-[45px] flex-col items-start shrink-0 flex-nowrap relative z-[36]">
-                    <span className="h-[45px] self-stretch shrink-0 basis-auto font-['Manrope'] text-[36px] font-extrabold leading-[45px] text-[#111416] tracking-[-1px] relative text-left whitespace-nowrap z-[37]">
+                  <div className="flex w-full max-w-[720px] h-auto flex-col items-start shrink-0 flex-nowrap relative z-[36]">
+                    <span className="h-auto self-stretch shrink-0 basis-auto font-['Manrope'] text-[24px] md:text-[30px] lg:text-[36px] font-extrabold leading-[30px] md:leading-[38px] lg:leading-[45px] text-[#111416] tracking-[-0.5px] lg:tracking-[-1px] relative text-left z-[37]">
                       {t.services.title}
                     </span>
                   </div>
-                  <div className="flex w-[720px] flex-col items-start shrink-0 flex-nowrap relative z-[38]">
-                    <span className="flex w-[720px] h-[48px] justify-start items-start self-stretch shrink-0 font-['Manrope'] text-[16px] font-normal leading-[24px] text-[#111416] relative text-left z-[39]">
+                  <div className="flex w-full max-w-[720px] flex-col items-start shrink-0 flex-nowrap relative z-[38]">
+                    <span className="flex w-full h-auto justify-start items-start self-stretch shrink-0 font-['Manrope'] text-[14px] md:text-[16px] font-normal leading-[21px] md:leading-[24px] text-[#111416] relative text-left z-[39]">
                       {t.services.description}
                     </span>
                   </div>
@@ -211,11 +327,11 @@ export default function App() {
                   className="flex flex-col gap-[12px] items-start self-stretch shrink-0 flex-nowrap relative z-40"
                   variants={staggerContainer}
                 >
-                  <div className="flex gap-[12px] items-start self-stretch grow shrink-0 basis-0 flex-nowrap relative z-[41]">
+                  <div className="flex flex-col md:flex-row gap-[12px] items-start self-stretch grow shrink-0 basis-0 flex-wrap lg:flex-nowrap relative z-[41]">
                     {t.services.items.map((service, index) => (
                       <motion.div 
                         key={index}
-                        className="flex w-[301px] pt-[24px] pr-[24px] pb-[24px] pl-[24px] flex-col gap-[16px] items-start self-stretch shrink-0 flex-nowrap bg-[#fff] rounded-[8px] border-solid border border-[#dde0e2] relative z-[42]"
+                        className="flex w-full md:w-[calc(50%-6px)] lg:w-[301px] pt-[24px] pr-[24px] pb-[24px] pl-[24px] flex-col gap-[16px] items-start shrink-0 flex-nowrap bg-[#fff] rounded-[8px] border-solid border border-[#dde0e2] relative z-[42]"
                         variants={fadeIn}
                       >
                         <div className="flex flex-col items-start self-stretch shrink-0 flex-nowrap relative z-[43]">
@@ -229,7 +345,7 @@ export default function App() {
                         </div>
                         <div className="flex flex-col gap-[4px] items-start self-stretch shrink-0 flex-nowrap relative z-[46]">
                           <div className="flex h-[20px] flex-col items-start self-stretch shrink-0 flex-nowrap relative z-[47]">
-                            <span className="h-[20px] self-stretch shrink-0 basis-auto font-['Manrope'] text-[16px] font-bold leading-[20px] text-[#111416] relative text-left whitespace-nowrap z-[48]">
+                            <span className="h-auto self-stretch shrink-0 basis-auto font-['Manrope'] text-[16px] font-bold leading-[20px] text-[#111416] relative text-left z-[48]">
                               {service.title}
                             </span>
                           </div>
@@ -254,7 +370,7 @@ export default function App() {
                 viewport={{ once: true }}
                 variants={fadeIn}
               >
-                <span className="h-[28px] self-stretch shrink-0 basis-auto font-['Manrope'] text-[22px] font-bold leading-[28px] text-[#111416] relative text-left whitespace-nowrap z-[70]">
+                <span className="h-auto self-stretch shrink-0 basis-auto font-['Manrope'] text-[20px] md:text-[22px] font-bold leading-[26px] md:leading-[28px] text-[#111416] relative text-left z-[70]">
                   {t.successStories.title}
                 </span>
               </motion.div>
@@ -265,11 +381,11 @@ export default function App() {
                 viewport={{ once: true, amount: 0.3 }}
                 variants={staggerContainer}
               >
-                <div className="flex pt-[16px] pr-[16px] pb-[16px] pl-[16px] gap-[12px] items-start grow shrink-0 basis-0 flex-nowrap relative z-[72]">
+                <div className="flex flex-col md:flex-row pt-[16px] pr-[16px] pb-[16px] pl-[16px] gap-[12px] items-start grow shrink-0 basis-0 flex-wrap lg:flex-nowrap relative z-[72]">
                   {t.successStories.items.map((story, index) => (
                     <motion.div 
                       key={index}
-                      className="flex flex-col gap-[16px] items-start self-stretch grow shrink-0 basis-0 flex-nowrap rounded-[8px] relative z-[73]"
+                      className="flex flex-col gap-[16px] items-start w-full md:w-[calc(50%-6px)] lg:w-auto lg:flex-1 shrink-0 flex-nowrap rounded-[8px] relative z-[73]"
                       variants={fadeIn}
                     >
                       <div 
@@ -281,12 +397,12 @@ export default function App() {
                       />
                       <div className="flex flex-col items-start self-stretch shrink-0 flex-nowrap relative z-[75]">
                         <div className="flex flex-col items-start self-stretch shrink-0 flex-nowrap relative z-[76]">
-                          <span className="flex w-[301.333px] h-[48px] justify-start items-start self-stretch shrink-0 font-['Manrope'] text-[16px] font-medium leading-[24px] text-[#111416] relative text-left z-[77]">
+                          <span className="flex w-full h-auto justify-start items-start self-stretch shrink-0 font-['Manrope'] text-[16px] font-medium leading-[24px] text-[#111416] relative text-left z-[77]">
                             {story.title}
                           </span>
                         </div>
                         <div className="flex flex-col items-start self-stretch shrink-0 flex-nowrap relative z-[78]">
-                          <span className="flex w-[301.333px] h-[42px] justify-start items-start self-stretch shrink-0 font-['Manrope'] text-[14px] font-normal leading-[21px] text-[#6b7582] relative text-left z-[79]">
+                          <span className="flex w-full h-auto justify-start items-start self-stretch shrink-0 font-['Manrope'] text-[14px] font-normal leading-[21px] text-[#6b7582] relative text-left z-[79]">
                             {story.description}
                           </span>
                         </div>
@@ -305,7 +421,7 @@ export default function App() {
                 viewport={{ once: true }}
                 variants={fadeIn}
               >
-                <span className="h-[28px] self-stretch shrink-0 basis-auto font-['Manrope'] text-[22px] font-bold leading-[28px] text-[#111416] relative text-left whitespace-nowrap z-[95]">
+                <span className="h-auto self-stretch shrink-0 basis-auto font-['Manrope'] text-[20px] md:text-[22px] font-bold leading-[26px] md:leading-[28px] text-[#111416] relative text-left z-[95]">
                   {t.pricing.title}
                 </span>
               </motion.div>
@@ -316,11 +432,11 @@ export default function App() {
                 viewport={{ once: true, amount: 0.3 }}
                 variants={staggerContainer}
               >
-                <div className="flex gap-[10px] items-start self-stretch grow shrink-0 basis-0 flex-nowrap relative z-[97]">
+                <div className="flex flex-col lg:flex-row gap-[10px] items-start self-stretch grow shrink-0 basis-0 flex-wrap lg:flex-nowrap relative z-[97]">
                   {['basic', 'pro', 'enterprise'].map((plan, index) => (
                     <motion.div 
                       key={plan}
-                      className="flex pt-[24px] pr-[24px] pb-[24px] pl-[24px] flex-col gap-[16px] items-start self-stretch grow shrink-0 basis-0 flex-nowrap bg-[#fff] rounded-[12px] border-solid border border-[#dde0e2] relative z-[98] hover:shadow-xl transition-shadow"
+                      className="flex pt-[24px] pr-[24px] pb-[24px] pl-[24px] flex-col gap-[16px] items-start w-full lg:w-auto self-stretch lg:flex-1 shrink-0 flex-nowrap bg-[#fff] rounded-[12px] border-solid border border-[#dde0e2] relative z-[98] hover:shadow-xl transition-shadow"
                       variants={fadeIn}
                       whileHover={{ y: -5, scale: 1.02 }}
                     >
@@ -332,7 +448,7 @@ export default function App() {
                         </div>
                         <div className="flex gap-[4px] items-baseline self-stretch shrink-0 flex-nowrap relative z-[102]">
                           <div className="flex flex-col items-start shrink-0 flex-nowrap relative z-[103]">
-                            <span className="h-[45px] shrink-0 basis-auto font-['Manrope'] text-[36px] font-extrabold leading-[45px] text-[#111416] tracking-[-1px] relative text-left whitespace-nowrap z-[104]">
+                            <span className="h-auto shrink-0 basis-auto font-['Manrope'] text-[32px] md:text-[36px] font-extrabold leading-[40px] md:leading-[45px] text-[#111416] tracking-[-1px] relative text-left whitespace-nowrap z-[104]">
                               {t.pricing.plans[plan].price}
                             </span>
                           </div>
@@ -389,7 +505,7 @@ export default function App() {
                 viewport={{ once: true }}
                 variants={fadeIn}
               >
-                <span className="h-[28px] self-stretch shrink-0 basis-auto font-['Manrope'] text-[22px] font-bold leading-[28px] text-[#111416] relative text-left whitespace-nowrap z-[193]">
+                <span className="h-auto self-stretch shrink-0 basis-auto font-['Manrope'] text-[20px] md:text-[22px] font-bold leading-[26px] md:leading-[28px] text-[#111416] relative text-left z-[193]">
                   {t.faq.title}
                 </span>
               </motion.div>
@@ -407,8 +523,8 @@ export default function App() {
                     variants={fadeIn}
                   >
                     <div className="flex pt-[8px] pr-0 pb-[8px] pl-0 justify-between items-center self-stretch shrink-0 flex-nowrap relative z-[196]">
-                      <div className="flex w-[263px] flex-col items-start shrink-0 flex-nowrap relative z-[197]">
-                        <span className="h-[21px] self-stretch shrink-0 basis-auto font-['Manrope'] text-[14px] font-medium leading-[21px] text-[#111416] relative text-left whitespace-nowrap z-[198]">
+                      <div className="flex flex-1 flex-col items-start shrink-0 flex-nowrap relative z-[197]">
+                        <span className="h-auto self-stretch shrink-0 basis-auto font-['Manrope'] text-[14px] font-medium leading-[21px] text-[#111416] relative text-left z-[198]">
                           {item.question}
                         </span>
                       </div>
@@ -431,7 +547,7 @@ export default function App() {
                           exit={{ height: 0, opacity: 0 }}
                           transition={{ duration: 0.3 }}
                         >
-                          <span className="flex w-[896px] h-[42px] justify-start items-start self-stretch shrink-0 font-['Manrope'] text-[14px] font-normal leading-[21px] text-[#6b7582] relative text-left z-[203]">
+                          <span className="flex w-full h-auto justify-start items-start self-stretch shrink-0 font-['Manrope'] text-[14px] font-normal leading-[21px] text-[#6b7582] relative text-left z-[203]">
                             {item.answer}
                           </span>
                         </motion.div>
@@ -452,12 +568,12 @@ export default function App() {
             transition={{ duration: 0.5 }}
           >
             <div className="flex flex-col items-start grow shrink-0 basis-0 flex-nowrap relative z-[219]">
-              <div className="flex pt-[40px] pr-[20px] pb-[40px] pl-[20px] flex-col gap-[24px] items-start self-stretch grow shrink-0 basis-0 flex-nowrap relative z-[220]">
-                <div className="flex justify-between items-center self-stretch shrink-0 flex-wrap relative z-[221]">
+              <div className="flex pt-[40px] px-[20px] pb-[40px] flex-col gap-[24px] items-start self-stretch grow shrink-0 basis-0 flex-nowrap relative z-[220]">
+                <div className="flex flex-col md:flex-row gap-[16px] md:gap-0 justify-between items-center self-stretch shrink-0 flex-wrap relative z-[221]">
                   {['overview', 'caseStudies', 'pricing', 'faq', 'contactUs'].map((key) => (
                     <motion.div 
                       key={key}
-                      className="flex w-[160px] flex-col items-center flex-nowrap relative z-[222] cursor-pointer"
+                      className="flex w-full md:w-[160px] flex-col items-center flex-nowrap relative z-[222] cursor-pointer"
                       whileHover={{ y: -2 }}
                     >
                       <span className="h-[24px] self-stretch shrink-0 basis-auto font-['Manrope'] text-[16px] font-normal leading-[24px] text-[#6b7582] hover:text-[#111416] transition-colors relative text-center whitespace-nowrap z-[223]">
@@ -486,7 +602,7 @@ export default function App() {
                   ))}
                 </div>
                 <div className="flex flex-col items-center self-stretch shrink-0 flex-nowrap relative z-[241]">
-                  <span className="h-[24px] self-stretch shrink-0 basis-auto font-['Manrope'] text-[16px] font-normal leading-[24px] text-[#6b7582] relative text-center whitespace-nowrap z-[242]">
+                  <span className="h-auto self-stretch shrink-0 basis-auto font-['Manrope'] text-[14px] md:text-[16px] font-normal leading-[21px] md:leading-[24px] text-[#6b7582] relative text-center z-[242]">
                     {t.footer.copyright}
                   </span>
                 </div>
