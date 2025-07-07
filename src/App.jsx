@@ -171,12 +171,10 @@ export default function App() {
                       </div>
                     </motion.div>
                     <motion.div 
-                      className="flex w-[134px] h-[48px] pt-0 pr-[20px] pb-0 pl-[20px] justify-center items-center flex-nowrap bg-[#dbe8f2] rounded-[24px] relative overflow-hidden z-[31] mt-[32px] mr-0 mb-0 ml-[216px] cursor-pointer hover:bg-[#c5d8e8] transition-colors"
+                      className="flex w-[134px] h-[48px] pt-0 pr-[20px] pb-0 pl-[20px] justify-center items-center flex-nowrap bg-[#dbe8f2] rounded-[24px] relative overflow-hidden z-[31] mt-[32px] mr-0 mb-0 ml-[216px]"
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.5, delay: 0.5 }}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
                     >
                       <div className="flex w-[94px] flex-col items-center shrink-0 flex-nowrap relative overflow-hidden z-[32]">
                         <span className="h-[24px] self-stretch shrink-0 basis-auto font-['Manrope'] text-[16px] font-bold leading-[24px] text-[#111416] relative text-center overflow-hidden whitespace-nowrap z-[33]">
@@ -217,9 +215,8 @@ export default function App() {
                     {t.services.items.map((service, index) => (
                       <motion.div 
                         key={index}
-                        className="flex w-[301px] pt-[16px] pr-[16px] pb-[16px] pl-[16px] flex-col gap-[12px] items-start self-stretch shrink-0 flex-nowrap bg-[#fff] rounded-[8px] border-solid border border-[#dde0e2] relative z-[42] cursor-pointer hover:shadow-lg transition-shadow"
+                        className="flex w-[301px] pt-[24px] pr-[24px] pb-[24px] pl-[24px] flex-col gap-[16px] items-start self-stretch shrink-0 flex-nowrap bg-[#fff] rounded-[8px] border-solid border border-[#dde0e2] relative z-[42]"
                         variants={fadeIn}
-                        whileHover={cardHover}
                       >
                         <div className="flex flex-col items-start self-stretch shrink-0 flex-nowrap relative z-[43]">
                           <div className="w-[24px] grow shrink-0 basis-0 relative overflow-hidden z-[44]">
@@ -237,7 +234,7 @@ export default function App() {
                             </span>
                           </div>
                           <div className="flex flex-col items-start self-stretch shrink-0 flex-nowrap relative z-[49]">
-                            <span className="flex w-[267px] h-[42px] justify-start items-start self-stretch shrink-0 font-['Manrope'] text-[14px] font-normal leading-[21px] text-[#6b7582] relative text-left z-50">
+                            <span className="flex w-full h-auto justify-start items-start self-stretch shrink-0 font-['Manrope'] text-[14px] font-normal leading-[21px] text-[#6b7582] relative text-left z-50">
                               {service.description}
                             </span>
                           </div>
@@ -272,18 +269,15 @@ export default function App() {
                   {t.successStories.items.map((story, index) => (
                     <motion.div 
                       key={index}
-                      className="flex flex-col gap-[16px] items-start self-stretch grow shrink-0 basis-0 flex-nowrap rounded-[8px] relative z-[73] cursor-pointer"
+                      className="flex flex-col gap-[16px] items-start self-stretch grow shrink-0 basis-0 flex-nowrap rounded-[8px] relative z-[73]"
                       variants={fadeIn}
-                      whileHover={{ y: -5 }}
                     >
-                      <motion.div 
+                      <div 
                         className={`h-[169px] self-stretch shrink-0 bg-[url(${
                           index === 0 ? 'https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-07/8KRtKHtFmo.png' :
                           index === 1 ? 'https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-07/w9muHTz77v.png' :
                           'https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-07/3BAKZBGS0a.png'
                         })] bg-cover bg-no-repeat rounded-[12px] relative overflow-hidden z-[74]`}
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.3 }}
                       />
                       <div className="flex flex-col items-start self-stretch shrink-0 flex-nowrap relative z-[75]">
                         <div className="flex flex-col items-start self-stretch shrink-0 flex-nowrap relative z-[76]">
@@ -409,9 +403,8 @@ export default function App() {
                 {t.faq.items.map((item, index) => (
                   <motion.div 
                     key={index} 
-                    className="flex pt-[8px] pr-[16px] pb-[8px] pl-[16px] flex-col items-start self-stretch shrink-0 flex-nowrap bg-[#f2f2f4] rounded-[12px] relative z-[195] cursor-pointer hover:bg-[#e5e8ea] transition-colors"
+                    className="flex pt-[8px] pr-[16px] pb-[8px] pl-[16px] flex-col items-start self-stretch shrink-0 flex-nowrap bg-[#f2f2f4] rounded-[12px] relative z-[195]"
                     variants={fadeIn}
-                    whileHover={{ scale: 1.01 }}
                   >
                     <div className="flex pt-[8px] pr-0 pb-[8px] pl-0 justify-between items-center self-stretch shrink-0 flex-nowrap relative z-[196]">
                       <div className="flex w-[263px] flex-col items-start shrink-0 flex-nowrap relative z-[197]">
