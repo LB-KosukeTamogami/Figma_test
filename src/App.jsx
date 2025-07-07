@@ -268,25 +268,25 @@ export default function App() {
                 transition={{ duration: 0.8 }}
               >
                 <div className="flex pt-[16px] px-[16px] pb-[16px] md:pt-[16px] md:px-[16px] md:pb-[16px] flex-col items-start self-stretch grow shrink-0 basis-0 flex-nowrap relative z-[24]">
-                  <div className="h-[500px] md:h-[400px] lg:h-[480px] self-stretch shrink-0 bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-07/nUhg12s8ac.png)] bg-cover bg-center bg-no-repeat rounded-[12px] relative overflow-hidden z-[25]">
-                    {/* グラデーションオーバーレイ */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/60 z-[26]" />
+                  <div className="h-[500px] md:h-[400px] lg:h-[480px] self-stretch shrink-0 bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-07/nUhg12s8ac.png)] bg-cover bg-center md:bg-[center_top] lg:bg-cover bg-no-repeat rounded-[12px] relative overflow-hidden z-[25]">
+                    {/* モバイルのみグラデーションオーバーレイ */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/60 z-[26] lg:hidden" />
                     
-                    {/* コンテンツコンテナ */}
-                    <div className="absolute inset-0 flex flex-col justify-center items-center md:items-start px-[20px] md:px-[40px] lg:px-[216px] z-[27]">
+                    {/* モバイル用コンテンツ - 中央配置 */}
+                    <div className="absolute inset-0 flex flex-col justify-center items-center px-[20px] z-[27] lg:hidden">
                       <motion.div 
-                        className="flex w-full max-w-[848px] flex-col gap-[16px] md:gap-[8px] items-center md:items-start"
+                        className="flex w-full max-w-[848px] flex-col gap-[16px] items-center"
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.3 }}
                       >
-                        <div className="flex flex-col items-center md:items-start self-stretch shrink-0 flex-nowrap">
-                          <span className="font-['Manrope'] text-[32px] md:text-[36px] lg:text-[48px] font-extrabold leading-[40px] md:leading-[45px] lg:leading-[60px] text-[#fff] tracking-[-1px] lg:tracking-[-2px] text-center md:text-left drop-shadow-lg" style={{ whiteSpace: 'pre-line' }}>
+                        <div className="flex flex-col items-center self-stretch shrink-0 flex-nowrap">
+                          <span className="font-['Manrope'] text-[32px] md:text-[36px] font-extrabold leading-[40px] md:leading-[45px] text-[#fff] tracking-[-1px] text-center drop-shadow-lg" style={{ whiteSpace: 'pre-line' }}>
                             {t.hero.title}
                           </span>
                         </div>
-                        <div className="flex flex-col items-center md:items-start self-stretch shrink-0 flex-nowrap max-w-[600px]">
-                          <span className="font-['Manrope'] text-[16px] md:text-[16px] lg:text-[18px] font-normal leading-[24px] md:leading-[24px] lg:leading-[27px] text-[#fff] text-center md:text-left drop-shadow-md">
+                        <div className="flex flex-col items-center self-stretch shrink-0 flex-nowrap max-w-[600px]">
+                          <span className="font-['Manrope'] text-[16px] font-normal leading-[24px] text-[#fff] text-center drop-shadow-md">
                             {t.hero.description}
                           </span>
                         </div>
@@ -304,6 +304,37 @@ export default function App() {
                         </motion.div>
                       </motion.div>
                     </div>
+                    
+                    {/* PC用コンテンツ - 元のFigmaデザイン通り */}
+                    <motion.div 
+                      className="hidden lg:flex w-[848px] flex-col gap-[8px] items-start flex-nowrap relative z-[26] mt-[285px] mr-0 mb-0 ml-[216px]"
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, delay: 0.3 }}
+                    >
+                      <div className="flex h-[120px] flex-col items-start self-stretch shrink-0 flex-nowrap relative z-[27]">
+                        <span className="flex w-[848px] h-[120px] justify-start items-start self-stretch shrink-0 font-['Manrope'] text-[48px] font-extrabold leading-[60px] text-[#fff] tracking-[-2px] relative text-left z-[28]" style={{ whiteSpace: 'pre-line' }}>
+                          {t.hero.title}
+                        </span>
+                      </div>
+                      <div className="flex flex-col items-start self-stretch shrink-0 flex-nowrap relative z-[29]">
+                        <span className="flex w-[848px] h-[48px] justify-start items-start self-stretch shrink-0 font-['Manrope'] text-[16px] font-normal leading-[24px] text-[#fff] relative text-left z-30">
+                          {t.hero.description}
+                        </span>
+                      </div>
+                    </motion.div>
+                    <motion.div 
+                      className="hidden lg:flex w-[134px] h-[48px] pt-0 pr-[20px] pb-0 pl-[20px] justify-center items-center flex-nowrap bg-[#dbe8f2] rounded-[24px] relative overflow-hidden z-[31] mt-[32px] mr-0 mb-0 ml-[216px]"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.5, delay: 0.5 }}
+                    >
+                      <div className="flex w-[94px] flex-col items-center shrink-0 flex-nowrap relative overflow-hidden z-[32]">
+                        <span className="h-[24px] self-stretch shrink-0 basis-auto font-['Manrope'] text-[16px] font-bold leading-[24px] text-[#111416] relative text-center overflow-hidden whitespace-nowrap z-[33]">
+                          {t.hero.cta}
+                        </span>
+                      </div>
+                    </motion.div>
                   </div>
                 </div>
               </motion.div>
