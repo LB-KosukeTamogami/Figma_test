@@ -259,7 +259,7 @@ export default function App() {
           </AnimatePresence>
 
           {/* Hero Section */}
-          <div className="flex pt-[20px] px-[16px] md:px-[80px] lg:px-[160px] justify-center items-start self-stretch grow shrink-0 basis-0 flex-nowrap relative z-[21]">
+          <div className="flex pt-[20px] px-0 md:px-[40px] lg:px-[80px] xl:px-[160px] justify-center items-start self-stretch grow shrink-0 basis-0 flex-nowrap relative z-[21]">
             <div className="flex flex-col items-start grow shrink-0 basis-0 flex-nowrap relative overflow-hidden z-[22]">
               <motion.div 
                 className="flex flex-col items-start self-stretch shrink-0 flex-nowrap relative z-[23]"
@@ -267,37 +267,43 @@ export default function App() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8 }}
               >
-                <div className="flex pt-[16px] pr-[16px] pb-[16px] pl-[16px] flex-col items-start self-stretch grow shrink-0 basis-0 flex-nowrap relative z-[24]">
-                  <div className="h-[300px] md:h-[400px] lg:h-[480px] self-stretch shrink-0 bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-07/nUhg12s8ac.png)] bg-cover bg-center bg-no-repeat rounded-[12px] relative overflow-hidden z-[25]">
-                    <motion.div 
-                      className="flex w-full max-w-[848px] flex-col gap-[8px] items-start flex-nowrap absolute bottom-[60px] left-[20px] md:left-[40px] lg:left-[216px] right-[20px] md:right-[40px] z-[26]"
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8, delay: 0.3 }}
-                    >
-                      <div className="flex h-[120px] flex-col items-start self-stretch shrink-0 flex-nowrap relative z-[27]">
-                        <span className="flex w-full h-auto justify-start items-start self-stretch shrink-0 font-['Manrope'] text-[28px] md:text-[36px] lg:text-[48px] font-extrabold leading-[36px] md:leading-[45px] lg:leading-[60px] text-[#fff] tracking-[-1px] lg:tracking-[-2px] relative text-left z-[28]" style={{ whiteSpace: 'pre-line' }}>
-                          {t.hero.title}
-                        </span>
-                      </div>
-                      <div className="flex flex-col items-start self-stretch shrink-0 flex-nowrap relative z-[29]">
-                        <span className="flex w-full h-auto justify-start items-start self-stretch shrink-0 font-['Manrope'] text-[14px] md:text-[16px] font-normal leading-[21px] md:leading-[24px] text-[#fff] relative text-left z-30">
-                          {t.hero.description}
-                        </span>
-                      </div>
-                    </motion.div>
-                    <motion.div 
-                      className="flex w-[134px] h-[48px] pt-0 pr-[20px] pb-0 pl-[20px] justify-center items-center flex-nowrap bg-[#dbe8f2] rounded-[24px] absolute bottom-[20px] left-[20px] md:left-[40px] lg:left-[216px] overflow-hidden z-[31]"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.5, delay: 0.5 }}
-                    >
-                      <div className="flex w-[94px] flex-col items-center shrink-0 flex-nowrap relative overflow-hidden z-[32]">
-                        <span className="h-[24px] self-stretch shrink-0 basis-auto font-['Manrope'] text-[16px] font-bold leading-[24px] text-[#111416] relative text-center overflow-hidden whitespace-nowrap z-[33]">
-                          {t.hero.cta}
-                        </span>
-                      </div>
-                    </motion.div>
+                <div className="flex pt-[16px] px-[16px] pb-[16px] md:pt-[16px] md:px-[16px] md:pb-[16px] flex-col items-start self-stretch grow shrink-0 basis-0 flex-nowrap relative z-[24]">
+                  <div className="h-[500px] md:h-[400px] lg:h-[480px] self-stretch shrink-0 bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-07/nUhg12s8ac.png)] bg-cover bg-center bg-no-repeat rounded-[12px] relative overflow-hidden z-[25]">
+                    {/* グラデーションオーバーレイ */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/60 z-[26]" />
+                    
+                    {/* コンテンツコンテナ */}
+                    <div className="absolute inset-0 flex flex-col justify-center items-center md:items-start px-[20px] md:px-[40px] lg:px-[216px] z-[27]">
+                      <motion.div 
+                        className="flex w-full max-w-[848px] flex-col gap-[16px] md:gap-[8px] items-center md:items-start"
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.3 }}
+                      >
+                        <div className="flex flex-col items-center md:items-start self-stretch shrink-0 flex-nowrap">
+                          <span className="font-['Manrope'] text-[32px] md:text-[36px] lg:text-[48px] font-extrabold leading-[40px] md:leading-[45px] lg:leading-[60px] text-[#fff] tracking-[-1px] lg:tracking-[-2px] text-center md:text-left drop-shadow-lg" style={{ whiteSpace: 'pre-line' }}>
+                            {t.hero.title}
+                          </span>
+                        </div>
+                        <div className="flex flex-col items-center md:items-start self-stretch shrink-0 flex-nowrap max-w-[600px]">
+                          <span className="font-['Manrope'] text-[16px] md:text-[16px] lg:text-[18px] font-normal leading-[24px] md:leading-[24px] lg:leading-[27px] text-[#fff] text-center md:text-left drop-shadow-md">
+                            {t.hero.description}
+                          </span>
+                        </div>
+                        <motion.div 
+                          className="flex h-[48px] px-[24px] justify-center items-center bg-[#4169E1] hover:bg-[#3451B2] rounded-[24px] mt-[16px] cursor-pointer transition-colors"
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.5, delay: 0.5 }}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <span className="font-['Manrope'] text-[16px] font-bold leading-[24px] text-white whitespace-nowrap">
+                            {t.hero.cta}
+                          </span>
+                        </motion.div>
+                      </motion.div>
+                    </div>
                   </div>
                 </div>
               </motion.div>
